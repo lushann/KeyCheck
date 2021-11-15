@@ -244,21 +244,23 @@ namespace Keys
                 // Do PIDX Check
                 IntPtr dllHandle = NativeMethods.LoadLibrary(dllPath);
 
-                byte[] gpid = new byte[0x32];
-                byte[] opid = new byte[0xA4];
-                byte[] npid = new byte[0x04F8];
-
+                // 分配全局内存
                 IntPtr pid = Marshal.AllocHGlobal(0x32);
                 IntPtr dpid = Marshal.AllocHGlobal(0xA4);
                 IntPtr dpid4 = Marshal.AllocHGlobal(0x04F8);
 
                 const string mspid = "XXXXX";
 
+                byte[] gpid = new byte[0x32];
+                byte[] opid = new byte[0xA4];
+                byte[] npid = new byte[0x04F8];
+
                 gpid[0] = 0x32;
                 opid[0] = 0xA4;
                 npid[0] = 0xF8;
                 npid[1] = 0x04;
 
+                //
                 Marshal.Copy(gpid, 0, pid, 0x32);
                 Marshal.Copy(opid, 0, dpid, 0xA4);
                 Marshal.Copy(npid, 0, dpid4, 0x04F8);
